@@ -1,0 +1,2344 @@
+<link rel="shortcut icon" type="image/png" href="images/reports.png"/>
+<title>Cutting & Ins Plan</title>
+<?php 
+require_once('calendar/calendar/classes/tc_calendar.php');
+	date_default_timezone_set('Asia/Colombo');
+	session_start();
+	include("database_connections.php");
+
+	error_reporting(0);
+	$plan_date=$_GET['p_date'];
+	if($plan_date != ''){
+		$today= $plan_date;
+	} 
+	else{
+		$today = date("Y-m-d");
+		
+	}
+	
+	$today_n=date("Y-m-d");
+	
+	
+	
+	//
+	if($type!=null)
+	{
+		
+		
+		if($type=='update2')		
+		{	
+			$updateid_2=$_GET['updateid_2'];
+			$plan_date=$_GET['p_date'];
+			$order=$_GET['order'];
+	
+	
+			$belt=mysqli_query($con,"update tbl_virtual_plan_ww_of_set_order a set  a.plan_date='$plan_date' 
+			,a.order='$order' 
+			where a.id='$updateid_2'")or die("insert_err4");
+		}
+		
+		
+		
+	}
+	
+	
+	if(isset($_POST['btnprio_1']))
+	{
+		
+		
+		//mysqli_query($con,"delete from tbl_virtual_plan_decoration_belt_wise_data_snk where chit_final_status='1' ");
+		$count_1=isset($_REQUEST["count_1"]) ? $_REQUEST["count_1"] : "";
+		
+//$count_1new=isset($_REQUEST["count_1new"]) ? $_REQUEST["count_1new"] : "";
+		$plan_date_fix=$today;
+		
+		
+		$count_1=10000;
+		//print(123123);exit;
+		
+		for ($x = 1; $x <= $count_1; $x++) {
+			$tempid_1=isset($_REQUEST["tempid_1_".$x]) ? $_REQUEST["tempid_1_".$x] : "";
+			$pro_no=isset($_REQUEST["pro_no".$x]) ? $_REQUEST["pro_no".$x] : "";
+			$order=isset($_REQUEST["order_".$x]) ? $_REQUEST["order_".$x] : "";
+			$shift=isset($_REQUEST["shift_".$x]) ? $_REQUEST["shift_".$x] : "";
+			$design=isset($_REQUEST["design".$x]) ? $_REQUEST["design".$x] : "";
+			$lot=isset($_REQUEST["lot".$x]) ? $_REQUEST["lot".$x] : "";
+			$qty=isset($_REQUEST["qty".$x]) ? $_REQUEST["qty".$x] : "";
+			
+			
+			
+			
+			
+			
+			if(isset($_POST['prio_1'.$x])) {
+				
+				//print("insert into tbl_cut_ins_plan  (pro_no,p_date,order) values  ('$pro_no','$plan_date_fix','$order') ");exit;
+				$belt=mysqli_query($con,"insert into tbl_cut_ins_plan  (pro_no,p_date,design,lot,qty,order_no,shift,date) values  ('$pro_no','$plan_date_fix','$design','$lot','$qty','$order','$shift','$today_n') ")or die("insert_err4");
+			} 
+			else{
+				//$sqlreport=mysqli_query($con,"update tbl_virtual_plan_decoration_final_data_temp a set a.is_priority='0' where id='$tempid_1'");
+			}
+			
+		}
+		
+			header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+	
+	
+	if(isset($_POST['btnprio_2']))
+	{
+		//print(123123);exit;
+		$count_2=isset($_REQUEST["count_2"]) ? $_REQUEST["count_2"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			$tempid_2=isset($_REQUEST["tempid_2_".$x]) ? $_REQUEST["tempid_2_".$x] : "";
+			
+			//print($count_2);exit;
+			if(isset($_POST['prio_2'.$x])) {
+				
+				//print("delete from tbl_cut_ins_plan  where id='$tempid_2'");exit;
+				$belt=mysqli_query($con,"delete from tbl_cut_ins_plan  where id='$tempid_2'")or die("insert_err4");
+			} 
+			else{
+				//$sqlreport=mysqli_query($con,"update tbl_virtual_plan_decoration_final_data_temp a set a.is_priority='0' where id='$tempid_1'");
+			}
+			
+		}
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+
+if(isset($_POST['btnprio_222']))
+	{
+		//print(123123);exit;
+		$count_2=isset($_REQUEST["count_222"]) ? $_REQUEST["count_222"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			$tempid_2=isset($_REQUEST["tempid_222_".$x]) ? $_REQUEST["tempid_222_".$x] : "";
+			
+			//print($count_2);exit;
+			if(isset($_POST['prio_222'.$x])) {
+				
+				//print("delete from tbl_cut_ins_plan  where id='$tempid_2'");exit;
+				$belt=mysqli_query($con,"delete from tbl_cut_ins_plan  where id='$tempid_2'")or die("insert_err4");
+			} 
+			else{
+				//$sqlreport=mysqli_query($con,"update tbl_virtual_plan_decoration_final_data_temp a set a.is_priority='0' where id='$tempid_1'");
+			}
+			
+		}
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnprio_22']))
+	{
+		//print(3333);exit;
+		$count_2=isset($_REQUEST["count_22"]) ? $_REQUEST["count_22"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			$tempid_2=isset($_REQUEST["tempid_22_".$x]) ? $_REQUEST["tempid_22_".$x] : "";
+			
+			//print($count_2);exit;
+			if(isset($_POST['prio_22'.$x])) {
+				
+				//print("delete from tbl_cut_ins_plan  where id='$tempid_2'");exit;
+				$belt=mysqli_query($con,"delete from tbl_cut_ins_plan  where id='$tempid_2'")or die("insert_err4");
+			} 
+			else{
+				//$sqlreport=mysqli_query($con,"update tbl_virtual_plan_decoration_final_data_temp a set a.is_priority='0' where id='$tempid_1'");
+			}
+			
+		}
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnprio_2222']))
+	{
+		//print(123123);exit;
+		$count_2=isset($_REQUEST["count_2222"]) ? $_REQUEST["count_2222"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			$tempid_2=isset($_REQUEST["tempid_2222_".$x]) ? $_REQUEST["tempid_2222_".$x] : "";
+			
+			//print($count_2);exit;
+			if(isset($_POST['prio_2222'.$x])) {
+				
+				//print("delete from tbl_cut_ins_plan  where id='$tempid_2'");exit;
+				$belt=mysqli_query($con,"delete from tbl_cut_ins_plan  where id='$tempid_2'")or die("insert_err4");
+			} 
+			else{
+				//$sqlreport=mysqli_query($con,"update tbl_virtual_plan_decoration_final_data_temp a set a.is_priority='0' where id='$tempid_1'");
+			}
+			
+		}
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+	
+	if(isset($_POST['btnprio_4']))
+	{
+		$plan_date=isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+		
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date");
+	}
+	
+	
+	if(isset($_POST['btnchange1']))
+	{
+		
+			
+		$count_2=isset($_REQUEST["count_2"]) ? $_REQUEST["count_2"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=100;
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			//print(331231);exit;
+			$updateid_2=isset($_REQUEST["tempid_2_".$x]) ? $_REQUEST["tempid_2_".$x] : "";
+			$order_no=isset($_REQUEST["order_no_2".$x]) ? $_REQUEST["order_no_2".$x] : "";
+			
+			
+	
+	
+			$belt=mysqli_query($con,"update tbl_cut_ins_plan a set  a.order_no='$order_no' 
+			where a.id='$updateid_2' and a.shift='1'")or die("insert_err4");
+			
+			
+		}
+		
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnchange222']))
+	{
+		
+			
+		$count_2=isset($_REQUEST["count_222"]) ? $_REQUEST["count_222"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=100;
+		
+		for ($x = 1; $x <= $count_2; $x++) {
+			//print(331231);exit;
+			$updateid_2=isset($_REQUEST["tempid_222_".$x]) ? $_REQUEST["tempid_222_".$x] : "";
+			$order_no=isset($_REQUEST["order_no_222".$x]) ? $_REQUEST["order_no_222".$x] : "";
+			
+			
+	
+	
+			$belt=mysqli_query($con,"update tbl_cut_ins_plan a set  a.order_no='$order_no' 
+			where a.id='$updateid_2' and a.shift='2'")or die("insert_err4");
+			
+			
+		}
+		
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnchange2']))
+	{
+		
+			//print(331231);exit;
+		$count_22=isset($_REQUEST["count_22"]) ? $_REQUEST["count_22"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		for ($x = 1; $x <= $count_22; $x++) {
+			$updateid_22=isset($_REQUEST["tempid_22_".$x]) ? $_REQUEST["tempid_22_".$x] : "";
+			$order_no2=isset($_REQUEST["order_no_22".$x]) ? $_REQUEST["order_no_22".$x] : "";
+			
+			//print($plan_date);exit;
+	
+	
+			$belt=mysqli_query($con,"update tbl_cut_ins_plan a set  a.order_no='$order_no2' 
+			where a.id='$updateid_22' and a.shift='3'")or die("insert_err4");
+			
+			
+		}
+		
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+	
+if(isset($_POST['btnchange2222']))
+	{
+		
+			//print(331231);exit;
+		$count_2222=isset($_REQUEST["count_2222"]) ? $_REQUEST["count_2222"] : "";
+		$plan_date_fix=$today;
+		
+		$count_2=10000;
+		
+		for ($x = 1; $x <= $count_2222; $x++) {
+			$updateid_22=isset($_REQUEST["tempid_2222_".$x]) ? $_REQUEST["tempid_2222_".$x] : "";
+			$order_no2=isset($_REQUEST["order_no_2222".$x]) ? $_REQUEST["order_no_2222".$x] : "";
+			
+			//print($plan_date);exit;
+	
+	
+			$belt=mysqli_query($con,"update tbl_cut_ins_plan a set  a.order_no='$order_no2' 
+			where a.id='$updateid_22' and a.shift='4'")or die("insert_err4");
+			
+			
+		}
+		
+		
+		header("Location:Cut_ins_plan.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnpri']))
+	{		
+		
+		//print(12312312);exit;
+		$plan_date_fix=$today;
+		
+		header("Location:Cut_ins_plan_print.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnpri222']))
+	{		
+		
+		//print(12312312);exit;
+		$plan_date_fix=$today;
+		
+		header("Location:Cut_ins_plan_print3.php?p_date=$plan_date_fix");
+	}
+
+	if(isset($_POST['btnpri2']))
+	{		
+		
+		//print(12312312);exit;
+		$plan_date_fix=$today;
+		
+		header("Location:Cut_ins_plan_print2.php?p_date=$plan_date_fix");
+	}	
+
+	if(isset($_POST['btnpri2222']))
+	{		
+		
+		//print(12312312);exit;
+		$plan_date_fix=$today;
+		
+		header("Location:Cut_ins_plan_print4.php?p_date=$plan_date_fix");
+	}	
+	
+	
+	
+	
+?>
+
+
+
+<?php
+	
+	
+?>
+
+
+
+<?php  error_reporting (E_ALL ^ E_NOTICE); ?>
+<title>:: Noritake - Packed Data ::</title>
+<script language="javascript" src="calendar/calendar/calendar.js"></script>
+<link href="calendar/calendar/calendar.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	
+	.heading{
+	background-color:#2859AA;
+	border:1px solid #121649;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:14px;
+	padding:3px;
+	text-align:center;
+	margin-bottom:20px;
+	}
+	.bcode{
+	
+	width:210px;
+	height:30px;
+	padding:3px;
+	color:#663300;
+	font-family:Arial, Helvetica, sans-serif;
+	size:30px;
+	font-weight:bold;
+	font-size: 16px;
+	}
+	#status{
+	display:none;
+	}
+	.err{
+	color:#CC0000;
+	font:Tahoma 80%;
+	}
+	.suc{
+	color:#33CC00;
+	font:Tahoma 80%;
+	}
+	.alr{
+	color:#FF5218;
+	font:Tahoma 80%;
+	}
+	.clock {
+	background-color: #FFFFFF;
+	text-align: center;
+	border-bottom: 0;
+	border-left: 0;
+	border-top: 0;
+	border-right: 0;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:12px;
+	}
+	.style2 {background-color: #286488; border: 1px solid #006767; color: #FFFFFF; font-weight: bold; font-size: 16px; padding: 3px; text-align: center; margin-bottom: 20px; }
+	.style3 {font-family: Arial, Helvetica, sans-serif}
+	.style4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	}
+	
+	.line {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1px;
+	font-weight: bold;
+	}
+	.hide_info {
+	}
+	.patt {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #286488;
+	color: #FFF;
+	width: 140px;
+	height: 35px;
+	}
+	
+	.qty {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	background-color: #FFF;
+	color: #FFF;
+	width: 120px;
+	height: 50px;
+	}
+	.curve {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #286488;
+	color: #FFF;
+	width: 80px;
+	height: 35px;
+	}
+	.stock {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #9CF;
+	color: #000;
+	width: 60px;
+	height: 25px;
+	}
+	.in {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #BFFFBF;
+	color: #000;
+	width: 60px;
+	height: 25px;
+	}
+	.out {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #FC9;
+	color: #000;
+	width: 60px;
+	height: 25px;
+	}
+	.no {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #CCC;
+	color: #000;
+	width: 120px;
+	height: 25px;
+	}
+	a {
+	font-size: 14px;
+	color: #FFFFFF;
+	}
+	a:link {
+	text-decoration: none;
+	color: #003300;
+	}
+	a:visited {
+	text-decoration: none;
+	color: #003300;
+	}
+	a:hover {
+	text-decoration: none;
+	color: #FF6600;
+	}
+	a:active {
+	text-decoration: none;
+	color: #003300;
+	}
+	.textbox {
+	BORDER-RIGHT: #999999 1px solid;
+	BORDER-TOP: #999999 1px solid;
+	FONT-SIZE: 12px;
+	FILTER: progid:DXImageTransform.Microsoft.Alpha( style=0,opacity=50); 													BORDER-LEFT: #999999 1px solid;
+	COLOR: #000000;
+	BORDER-BOTTOM: #999999 1px solid;
+	FONT-FAMILY: verdana;
+	BACKGROUND-COLOR: #738e94;
+	width: 200px;
+	height: 30px;
+	font-weight: bold;
+	}
+	.err{
+	color:#F00;
+	font:Tahoma 50%;
+	font-size:12px;
+	} 
+	
+	.inn{
+	float:left;
+	font-size:16px;
+	border:solid 1px #000000;
+	width:143px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#0066CC;
+	font-weight:bold;		
+	
+	
+	}
+	.srn {
+	float:left;
+	font-size:16px;
+	border:solid 1px #000000;
+	width:100px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#063;
+	font-weight:bold;
+	}
+	.password {
+	font-family: Calibri;
+	font-size: 14px;
+	color: #FFF;
+	}
+	.qty {
+	float:left;
+	font-size:16px;
+	border:solid 1px #000000;
+	width:50px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#0066CC;
+	font-weight:bold;
+	}
+	.button {
+	font-size:12px;
+	color:#FFF;
+	text-decoration:none;
+	display:block;
+	width:100px;
+	padding:5px;
+	border:1px solid #DDD;
+	text-align:center;	
+	font-weight: bold;
+	background-color: #3278BE;
+	}
+	
+	.button2 {
+	font-size:12px;
+	color:#FFF;
+	text-decoration:none;
+	display:block;
+	width:100px;
+	padding:5px;
+	border:1px solid #DDD;
+	text-align:center;	
+	font-weight: bold;
+	background-color: red;
+	}
+	
+	.title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	}
+	.text1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	}
+	body,td,th {
+	color: #000000;
+	
+	}
+	
+	#jsddm
+	{	margin: 0;
+	padding: 0}
+	
+	#jsddm li
+	{	float: left;
+	list-style: none;
+	font: 12px Tahoma, Arial;
+	font-weight:bold}
+	
+	#jsddm li a
+	{	display: block;
+	background: #324143;
+	padding: 5px 12px;
+	text-decoration: none;
+	border-right: 1px solid white;
+	width: 103px;
+	color: #EAFFED;
+	white-space: nowrap}
+	
+	#jsddm li a:hover
+	{	background: #24313C}
+	
+	#jsddm li ul
+	{	margin: 0;
+	padding: 0;
+	position: absolute;
+	visibility: hidden;
+	border-top: 1px solid white}
+	
+	#jsddm li ul li
+	{	float: none;
+	display: inline}
+	
+	#jsddm li ul li a
+	{	width: auto;
+	background: #A9C251;
+	color: #24313C}
+	
+	#jsddm li ul li a:hover
+	{	background: #8EA344}
+	body{
+	font-family: Helvetica, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	}
+	
+	p, h1, form, button{border:0; margin:0; padding:0;}
+	
+	.spacer{clear:both; height:1px;}
+	
+	
+	.login{
+	margin:0 auto;
+	width:400px;
+	padding:14px;
+	}
+	
+	
+	#stylized{
+	border:solid 3px #2E6881;
+	}
+	
+	#stylized h1 {
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:8px;
+	}
+	
+	#stylized p {
+	font-size:11px;
+	color:#666666;
+	margin-bottom:20px;
+	border-bottom:solid 1px #b7ddf2;
+	padding-bottom:10px;
+	}
+	
+	#stylized label{
+	font-weight:bold;
+	text-align:right;
+	width:140px;
+	float:left;
+	}
+	
+	
+	
+	#stylized button{
+	clear:both;
+	
+	width:60px;
+	height:31px;
+	background:#b7ddf2;
+	text-align:center;
+	line-height:31px;
+	color:#FFFFFF;
+	font-size:11px;
+	font-weight:bold;
+	}
+	
+	body {
+	background-color: #000;
+	}
+	.bcode1 {	border:2px solid #006767;
+	width:210px;
+	height:30px;
+	padding:3px;
+	color:#004040;
+	font-family:Arial, Helvetica, sans-serif;
+	size:30px;
+	font-weight:bold;
+	font-size: 16px;
+	}
+	.textbox1 {	BORDER-RIGHT: #999999 1px solid;
+	BORDER-TOP: #999999 1px solid;
+	FONT-SIZE: 12px;
+	FILTER: progid:DXImageTransform.Microsoft.Alpha( style=0,opacity=50); 													BORDER-LEFT: #999999 1px solid;
+	COLOR: #000000;
+	BORDER-BOTTOM: #999999 1px solid;
+	FONT-FAMILY: verdana;
+	BACKGROUND-COLOR: #CCC;
+	width: 80px;
+	height: 30px;
+	font-weight: bold;
+	}
+	.notification-success{
+	
+	border-left-width:1px;
+	border-right-width:1px;
+	box-shadow:0 0 6px #AAAAAA;
+	margin:15px 0;
+	padding:15px 15px;
+	text-align:center;
+	
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; color:#FFFFFF;
+	font-size:16px;
+	border-color:#0C514B;
+	background-color:#006600;
+	
+	
+	
+	}
+	.qty_in {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 50px;
+	font-weight: bold;
+	color:#FFF;
+	
+	}
+	.confirm_data {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color:#FFF;
+	}
+	.details_font {font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	}
+	.line1 {	font-size: 1px;
+	}
+	.textBoxStyle {	
+	background-color: #cccccc;
+	}
+	
+	body {
+	background-image: url("images/bk-r.jpg");
+	background-color: #cccccc;
+	}
+	
+	.style13 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	}
+	.style10 {	color: #171B20;
+	font-weight: bold;
+	}
+	.style15 {font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #FFFFFF; font-weight: bold; }
+	.style16 {font-family: Arial, Helvetica, sans-serif; font-size: 1px; }
+	.clock {
+	background-color: #FFFFFF;
+	text-align: center;
+	border-bottom: 0;
+	border-left: 0;
+	border-top: 0;
+	border-right: 0;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:12px;
+	}
+	.tdinfo {
+	font-size: 14px;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	}
+	.textbox {	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	border-left-color: #FFF;
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	}
+	#apDiv1 {	position:absolute;
+	width:207px;
+	height:42px;
+	z-index:1;
+	left: 633px;
+	top: 39px;
+	}
+	.textbox1 {font-family: Verdana, Geneva, sans-serif;
+	font-size: 13px;
+	font-weight:bold;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	border-left-color: #FFF;
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	}
+	.style18 {color: #171B20; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
+	.line {
+	font-size: 2px;
+	}
+	.tot {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	}
+	
+	
+	.input3 {
+	background-color: rgba(0,0,0,0);
+	color: blue;
+	border: none;
+	font-size: inherit;
+	width:100;
+	text-align: left;
+	}
+	
+	
+	.input6 {
+	background-color: rgba(0,0,0,0);
+	color: red;
+	border: none;
+	font-size: inherit;
+	width:100;
+	text-align: left;
+	}
+	
+	
+	.input2 {
+	background-color: rgba(0,0,0,0);
+	color: red;
+	border: none;
+	font-size: inherit;
+	width:100;
+	text-align: left;
+	}
+</style>
+<SCRIPT LANGUAGE="JavaScript">
+	
+	
+	function final_data() { 
+		var type='final';
+		window.location.replace("production_plan_edit_snk.php?type="+type);
+	}
+	
+	
+	function Drop_1(count) { 
+		var tempid_1 = document.getElementById('tempid_1_'+count).value;
+		var type='temp1';
+		window.location.replace("production_plan.php?tempid_1="+tempid_1+"&type="+type);
+	}
+	
+	function Drop_2(count) { 
+		var tempid_2 = document.getElementById('tempid_2_'+count).value;
+		var type='temp2';
+		
+		//alert(tempid_2);
+		window.location.replace("production_plan.php?tempid_2="+tempid_2+"&type="+type);
+	}
+	
+	
+	
+	
+	function update_2(count) { 
+		
+		
+		var updateid_2 = document.getElementById('tempid_2_'+count).value;
+		var plan_date = document.getElementById('plan_date'+count).value;
+		var order = document.getElementById('order'+count).value;
+		
+		//alert(order);exit;
+		
+		
+		var type='update2';
+		
+		window.location.replace("plan_master_change_of.php?updateid_2="+updateid_2+"&type="+type+"&plan_date="+plan_date+"&order="+order);
+		
+		
+		
+	}
+	
+	
+	function update_3(count) { 
+		
+		var updateid_3 = document.getElementById('tempid_3_'+count).value;
+		
+		var change_qty_3 = document.getElementById('change_qty_3_'+count).value;
+		
+		var fp_3 = document.getElementById('fp_3_'+count).value;
+		
+		var fr_3 = document.getElementById('fr_3_'+count).value;
+		
+		var type='update3';
+		
+		window.location.replace("production_plan.php?updateid_3="+updateid_3+"&type="+type+"&change_qty_3="+change_qty_3+"&fp_3="+fp_3+"&fr_3="+fr_3);
+		
+		
+	}
+	
+	
+	<!-- Begin
+	var timerID = null;
+	var timerRunning = false;
+	function stopclock (){
+		if(timerRunning)
+		clearTimeout(timerID);
+		timerRunning = false;
+	}
+	function showtime () {
+		var now = new Date();
+		var hours = now.getHours();
+		var minutes = now.getMinutes();
+		var seconds = now.getSeconds()
+		var timeValue = "" + ((hours >12) ? hours -12 :hours)
+		if (timeValue == "0") timeValue = 12;
+		timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+		timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+		timeValue += (hours >= 12) ? " P.M." : " A.M."
+		document.clock.face.value = timeValue;
+		timerID = setTimeout("showtime()",1000);
+		timerRunning = true;
+	}
+	function startclock() {
+		stopclock();
+		showtime();
+	}
+	
+	var months=new Array(13);
+	months[1]="January";
+	months[2]="February";
+	months[3]="March";
+	months[4]="April";
+	months[5]="May";
+	months[6]="June";
+	months[7]="July";
+	months[8]="August";
+	months[9]="September";
+	months[10]="October";
+	months[11]="November";
+	months[12]="December";
+	var time=new Date();
+	var lmonth=months[time.getMonth() + 1];
+	var date=time.getDate();
+	var year=time.getYear();
+	if (year < 2000)    
+	year = year + 1900; 
+</SCRIPT>
+<script type="text/javascript">
+	function selectAll()
+	{
+		document.form1.bcode.focus();
+		document.form1.bcode.select();
+	}
+</script>
+
+<BODY onLoad="startclock()">
+	<?php
+	
+	
+	
+?>
+	
+	<?php
+		//print(123);exit;
+		if(1)
+		{
+			
+		?><td width="30%" valign="top">
+					<a href="/PMSDev/view/index.php" >
+						<img src="images/home.png"  width="40" height="40"  /> Home
+					</a>
+				</td>
+		<table width="800" height="5" border="0" align="center">
+			<tr align="center">
+				<td align="center" style="color:#36a2ef;font-size: -webkit-xxx-large;">Cutting & Inspection Plan</td>
+			</tr>
+		</table>
+		<table width="800" height="5" border="0" align="center">
+			<tr>
+				<td style="color:#36a2ef;font-size: -webkit-xxx-large;"></td>
+			</tr>
+		</table>
+		
+		
+		<form id="form2" name="form2" method="post">
+		
+		<table width="800" height="5" border="0" align="center"><tr>
+				
+				
+													<td width="83"><font size='2px'>Select Date :</font></td>
+							<td width="114" hidden nowrap><?php
+								$myCalendar = new tc_calendar("date5", true, false);
+								$myCalendar->setIcon("calendar/calendar/images/iconCalendar.gif");
+								$myCalendar->setPath("calendar/calendar/");
+								$myCalendar->setYearInterval(2011, 2025);
+								$myCalendar->dateAllow('2011-01-1', '2025-12-31');
+								$myCalendar->setDateFormat('j F Y');
+								$myCalendar->writeScript();
+							?></td>
+							<td>
+							<input name="date5"class="input3" id="date5"
+										
+									value="<?php print $today;?>"  >
+							
+							</td>
+					<td><input name="btnprio_4" value="Set Date" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+					<td><?php print $today; ?></td>		
+					<td align="left">
+						<input type="hidden" onclick="final_data()" class="button button2"  Value="Finalize" style="color:#ffffff; width: 300; height: 30;" />
+						
+						
+					</td>
+					
+					<td></td>
+				</tr></table>
+			<table width="800" height="100" border="0" align="center">
+				
+				<tr valign="top" >
+					<td width="120" >
+						<table width="120" height="75" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tr>
+								
+								<td colspan="9"  width="120" height="25" align="center" valign="middle" bgcolor="#004848" class="style15">QC Approved Jobs</td>
+								
+							</tr>
+							<tr class="style13">
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Pro No</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Design</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Lot</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Total <br>QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Remaning<br>QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">QTY</td>
+								<td width="50" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Order</td>
+								<td width="50" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">User</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Check</td>
+								<td width="10" height="25" valign="middle" bgcolor="#004848" class="style13">  </td>
+							</tr>  
+							
+							<tr class="tcday">
+								<td></td><td></td>
+								<td></td><td></td><td></td>
+								<td></td><td></td><td></td>
+								<td><input name="btnprio_1" value="Select" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+								</tr> <?php 
+								include("database_connections.php");
+								
+								$query_1 =mysqli_query($con,"SELECT * FROM (SELECT aa.*,
+(case when (eee.ssqty is null) then aa.no_of_sheets_lpt else aa.no_of_sheets_lpt-eee.ssqty end) AS `remm`
+FROM (SELECT pro_no_lpt as production_no_pst,
+pattern_no_pst,lot_no_pst,curve_no_lpt,no_of_sheets_lpt,planned_qty_lpt FROM 
+(select *,(case when (aa.t is null) then aa.plan_n else aa.plan_n- aa.t - aa.def  end) AS `rem2` from (SELECT *, 
+(case when (t is null) then planned_qty_lpt else `planned_qty_lpt`- t - def end) AS `rem`,
+(case when (close_curve_after_lpt > '0') then close_curve_after_lpt else planned_qty_lpt end) AS `plan_n` 
+FROM layout_plans_tbl a left join (SELECT SUM(c.item01_dt)As t ,SUM(c.register_dt)As def ,c.pro_no_dt,c.curve_no_dt,c.decal_pattern_dt 
+FROM dinspection_tbl c  group by c.pro_no_dt,c.curve_no_dt,c.decal_pattern_dt ) b 
+on a.pro_no_lpt=b.pro_no_dt and a.curve_no_lpt = b.curve_no_dt and a.decal_no_lpt = b.decal_pattern_dt
+where a.item05_lpt != '1') aa) aaa 
+left join (SELECT `ref_no_plt`,`item01_plt` FROM `preparing_layout_tbl` group by `ref_no_plt`) bbb
+on aaa.`pro_no_lpt` =bbb.ref_no_plt
+LEFT JOIN (SELECT * FROM  printing_status_tbl d GROUP BY d.ref_no_pst) ccc
+ON aaa.pro_no_lpt= ccc.ref_no_pst
+
+where aaa.rem2>0  AND ccc.pro06_pst !='1'   AND ccc.pro08_pst !='1'   AND ccc.pro10_pst ='1'
+group BY aaa.pro_no_lpt ORDER BY `aaa`.`pro_no_lpt`  ) aa 
+LEFT JOIN (select a.pro_no,a.design,a.lot,SUM(a.qty) AS ssqty FROM 
+tbl_cut_ins_plan a GROUP BY a.pro_no,a.design,a.lot) eee
+ON aa.production_no_pst =eee.pro_no AND aa.lot_no_pst = eee.lot AND aa.pattern_no_pst=eee.design
+) kkk WHERE kkk.remm>0");
+								
+								$count_1=0;
+								while($a_1=mysqli_fetch_array($query_1))
+								{
+									
+								?>
+								<tr class="style13" <?php if($a_1['reset']=='1'){ ?> bgcolor="#CCFFFF"<?php }?>>
+									
+									<td hidden width="10" align="right" valign="middle"  > 
+										<?php
+											$count_1++;
+											print "(".$count_1.").&nbsp;&nbsp;";
+										?>
+									</td>
+									<td valign="middle" width="48" hidden  >
+										<input  name="tempid_1_<?php print $count_1 ?>"class="input3" id="tempid_1_<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['id'];?>" readonly  ></td>
+									
+									
+									
+									
+									
+									<td valign="middle" width="48" >
+										<input name="pro_no<?php print $count_1 ?>"class="input3" id="pro_no<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['production_no_pst'];?>" readonly ></td>
+									
+									<td valign="middle" width="48" >
+										<input name="design<?php print $count_1 ?>"class="input3" id="design<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['pattern_no_pst'];?>" readonly ></td>
+									
+									<td valign="middle" width="48" >
+										<input name="lot<?php print $count_1 ?>"class="input3" id="lot<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['lot_no_pst'];?>" readonly ></td>
+
+									<td valign="middle" width="48" >
+										<input name="qshow<?php print $count_1 ?>"class="input3" id="qshow<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['no_of_sheets_lpt'];?>" readonly ></td>
+
+									<td valign="middle" width="48" >
+										<input name="remshow<?php print $count_1 ?>"class="input3" id="remshow<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['remm'];?>" readonly ></td>
+
+
+									
+									<td valign="middle" width="48" >
+										<input name="qty<?php print $count_1 ?>" id="qty<?php print $count_1 ?>"
+										
+									value="<?php print $a_1['remm'];?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"  ></td>
+									
+									
+									<td><input name="order_<?php print $count_1 ?>" type="text" id="order_<?php print $count_1 ?>" value="<?php
+														
+														print $count_1;
+													?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"></td>
+
+									<td><input name="shift_<?php print $count_1 ?>" type="text" id="shift_<?php print $count_1 ?>" value="<?php
+														
+														print '1';
+													?>" style="width:100;font-size: smaller;color: blue;font-weight: bold;text-align: right;"></td>
+									
+									
+									
+									
+									
+									
+									<td width="69" align="center" valign="middle" nowrap class="tdinfo"  height="30">
+										
+										<input type="checkbox" name="prio_1<?php print $count_1 ?>" id="prio_1<?php print $count_1 ?>"  > 
+										
+									</td>
+									
+									
+									
+									<!---
+										<td>
+										<input type="button" onclick="Drop_1(<?php print $count_1 ?>)" class="button button3"  Value="Drop" style="color:#ffffff; width: 100; height: 30;" />
+										
+										
+										</td>
+									-->
+									
+									
+									
+									
+									
+									
+								</tr>
+								<tr class="report_font">
+									<td height="1" colspan="2" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+								</tr> 
+								
+								
+								
+							<?php }?>
+							
+							
+							
+							<td align="right" valign="middle"  class="">
+								<input name="count" class="input3"id="count"					
+							value="<?php print $total_received_m;?>" readonly   ></td>
+							
+						</tr>
+						
+						
+						
+						<tr>
+							<td valign="middle" nowrap class="tdinfo">
+								<input name="count_1new" class="input3"id="count_1new"					
+							value="<?php print $count_1;?>" readonly  ></td>
+							<td></td>
+							<td></td>
+							<td></td><td></td><td></td>
+							<td hidden><input name="btndrop_1" value="Drop" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /> 
+								
+								
+							</td>
+							
+						</tr>
+						<tr class="report_font">
+							<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+						</tr> 
+						
+					</table>
+					
+				</td>
+				
+				<td width="400" >
+					<table width="400" height="100" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							
+							<td colspan="10"  width="300" height="25" align="center" valign="middle" bgcolor="#004848" class="style15">Planned Jobs shift 6.00 - 2.00 User 1</td>
+							
+						</tr>
+						<tr class="style13">
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Pro No</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Plan Date</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Design</td>
+							
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Lot</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Start Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">End Time</td>
+							
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Order</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Check</td>
+							<td width="10" height="25" valign="middle" bgcolor="#004848" class="style13">  </td>
+						</tr>  
+						
+						<tr class="tcday">
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+							<td><input  id="btnprio_2" name="btnprio_2" value="Remove" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							<td><input name="btnchange1" value="Change ALL" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							</tr> <?php 
+							include("database_connections.php");
+							//print("select * from tbl_cut_ins_plan a where p_date ='$today' order by order_no");exit;
+							$query_2 =mysqli_query($con,"select * from tbl_cut_ins_plan a where p_date ='$today' and shift = '1' order by ABS(order_no),pro_no");
+							
+							$count_2=0;
+							
+							$total_time=0;
+					
+					$final_t_qty=0;
+					$print_tea1=0;
+					$teac_tt=0;
+					$teac2_tt=0;
+							while($a_2=mysqli_fetch_array($query_2))
+							{
+								$time=$a_2['qty']*25;
+						$minutes=floor($time/60);
+						$sec=round($time%60);
+						$t_time = $time+360;
+
+						
+						
+						if($count_2 < 1){
+							//print(88);
+							$s_time = strtotime('06:00:00');
+							$s_time = date("H:i:s",strtotime('+0 seconds',$s_time));
+							//$s_time_t = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							$t_time_t=$total_time;
+							//print($t_time_t);
+						}
+						else{
+							
+							$s_time = strtotime('06:00:00');
+							$s_time = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							//print($s_time);exit;
+						}
+						$total_time=$total_time+$t_time;
+						$t_minutes=floor($total_time/60);
+						$t_sec=round($total_time%60);
+						
+						
+						$tea=$s_time;
+																		
+																		if($tea<'09:00:00'){
+																			
+																			$tea_t=$tea;																			
+																		}
+																		
+																		if($tea_t<$tea && $print_tea1 != 1 ){
+																		
+																		$print_tea1 = 1;
+																		$s_time_temp = strtotime($s_time);
+																		$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+
+																		$total_time=$total_time+1800;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+																		$teac=$s_time;
+																		
+																		if($teac<14.00){
+																			//print(333);exit;
+																			$teac_t=$teac;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac_t<$teac && $teac_tt!=1){
+																			//print(123123);exit;
+																			$teac_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			
+																			</tr>
+																			<?php
+																		}
+																		
+																		$teac2=$s_time;
+																		
+																		if($teac2<18.00){
+																			//print(333);exit;
+																			$teac2_t=$teac2;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac2_t<$teac2 && $teac2_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+																			$teac2_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+						
+						
+							?>
+							<tr class="style13" <?php if($a_2['reset']=='1'){ ?> bgcolor="#CCFFFF"<?php }?>>
+								<td width="10" align="right" valign="middle" hidden > 
+									<?php
+										$count_2++;
+										print "(".$count_2.").&nbsp;&nbsp;";
+
+									?>
+								</td>
+								<td valign="middle" width="48" hidden  >
+									<input name="tempid_2_<?php print $count_2 ?>"class="input3" id="tempid_2_<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['id'];?>" readonly  ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="pro_no_2<?php print $count_2 ?>"class="input3" id="pro_no_2<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['pro_no'];?>" readonly ></td>
+								
+								
+								
+								
+								<td valign="middle" width="48" >
+									<input name="p_date_2<?php print $count_2 ?>"class="input3" id="p_date_2<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['p_date'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="design_2<?php print $count_2 ?>"class="input3" id="design_2<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['design'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="lot_2<?php print $count_2 ?>"class="input3" id="lot_2<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['lot'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_2<?php print $count_2 ?>"class="input3" id="qty_2<?php print $count_2 ?>"
+									
+								value="<?php print $a_2['qty'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_2<?php print $count_2 ?>"class="input3" id="qty_2<?php print $count_2 ?>"
+									
+								value="<?php print $minutes.":".$sec;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_2<?php print $count_2 ?>"class="input3" id="qty_2<?php print $count_2 ?>"
+									
+								value="<?php print $s_time;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_2<?php print $count_2 ?>"class="input3" id="qty_2<?php print $count_2 ?>"
+									
+								value="<?php 
+								$s_time_temp2= strtotime($s_time);
+								$e_time = date("H:i:s",strtotime('+'.($time).'seconds',$s_time_temp2));
+								print $e_time ;?>" readonly ></td>
+								
+								
+								
+								
+								<td><input name="order_no_2<?php print $count_2 ?>" type="text" id="order_no_2<?php print $count_2 ?>" value="<?php
+														
+														print $a_2['order_no'];
+													?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"></td>
+								
+								<td width="69" align="center" valign="middle" nowrap class="tdinfo"  height="30">
+										
+										<input type="checkbox" name="prio_2<?php print $count_2 ?>" id="prio_2<?php print $count_2 ?>"  > 
+										
+									</td>
+								
+								
+								
+								<!---
+									<td>
+									<input type="button" onclick="Drop_1(<?php print $count_2 ?>)" class="button button3"  Value="Drop" style="color:#ffffff; width: 100; height: 30;" />
+									
+									
+									</td>
+								-->
+								
+								
+								
+								
+								
+								
+							</tr>
+							<tr class="report_font">
+								<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+							
+							</tr> 
+							
+							
+							
+						<?php }?>
+						
+						
+						
+						<td align="right" valign="middle"  class="">
+							<input name="count" class="input3"id="count"					
+						value="<?php print $total_received_m;?>" readonly   ></td>
+						
+					</tr>
+					
+					<tr>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+					<td><input name="btnpri" value="Print Plan" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+					</tr>
+					
+					<tr>
+						<td valign="middle" nowrap class="tdinfo">
+							<input name="count_2" class="input3"id="count_2"					
+						value="<?php print $count_2;?>" readonly hidden ></td>
+						<td></td>
+						<td></td>
+						<td></td><td></td><td></td>
+						<td hidden><input name="btndrop_2" value="Drop" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /> 
+							
+							
+						</td>
+						
+					</tr>
+					<tr class="report_font">
+						<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+					</tr> 
+					
+				</table>
+
+
+				<table width="400" height="100" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							
+							<td colspan="10"  width="300" height="25" align="center" valign="middle" bgcolor="#004848" class="style15">Planned Jobs shift 6.00 - 2.00 User 2</td>
+							
+						</tr>
+						<tr class="style13">
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Pro No</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Plan Date</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Design</td>
+							
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Lot</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Start Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">End Time</td>
+							
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Order</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Check</td>
+							<td width="10" height="25" valign="middle" bgcolor="#004848" class="style13">  </td>
+						</tr>  
+						
+						<tr class="tcday">
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+							<td><input  id="btnprio_222" name="btnprio_222" value="Remove" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							<td><input name="btnchange222" value="Change ALL" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							</tr> <?php 
+							include("database_connections.php");
+							//print("select * from tbl_cut_ins_plan a where p_date ='$today' order by order_no");exit;
+							$query_222 =mysqli_query($con,"select * from tbl_cut_ins_plan a where p_date ='$today' and shift = '2' order by ABS(order_no),pro_no");
+							
+							$count_222=0;
+							
+							$total_time=0;
+					
+					$final_t_qty=0;
+					$print_tea1=0;
+					$teac_tt=0;
+					$teac2_tt=0;
+							while($a_2=mysqli_fetch_array($query_222))
+							{
+								$time=$a_2['qty']*25;
+						$minutes=floor($time/60);
+						$sec=round($time%60);
+						$t_time = $time+360;
+
+						
+						
+						if($count_222 < 1){
+							//print(88);
+							$s_time = strtotime('06:00:00');
+							$s_time = date("H:i:s",strtotime('+0 seconds',$s_time));
+							//$s_time_t = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							$t_time_t=$total_time;
+							//print($t_time_t);
+						}
+						else{
+							
+							$s_time = strtotime('06:00:00');
+							$s_time = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							//print($s_time);exit;
+						}
+						$total_time=$total_time+$t_time;
+						$t_minutes=floor($total_time/60);
+						$t_sec=round($total_time%60);
+						
+						
+						$tea=$s_time;
+																		
+																		if($tea<'09:00:00'){
+																			
+																			$tea_t=$tea;																			
+																		}
+																		
+																		if($tea_t<$tea && $print_tea1 != 1 ){
+																		
+																		$print_tea1 = 1;
+																		$s_time_temp = strtotime($s_time);
+																		$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+
+																		$total_time=$total_time+1800;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+																		$teac=$s_time;
+																		
+																		if($teac<14.00){
+																			//print(333);exit;
+																			$teac_t=$teac;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac_t<$teac && $teac_tt!=1){
+																			//print(123123);exit;
+																			$teac_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			
+																			</tr>
+																			<?php
+																		}
+																		
+																		$teac2=$s_time;
+																		
+																		if($teac2<18.00){
+																			//print(333);exit;
+																			$teac2_t=$teac2;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac2_t<$teac2 && $teac2_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+																			$teac2_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+						
+						
+							?>
+							<tr class="style13" <?php if($a_2['reset']=='1'){ ?> bgcolor="#CCFFFF"<?php }?>>
+								<td width="10" align="right" valign="middle" hidden > 
+									<?php
+										$count_222++;
+										print "(".$count_222.").&nbsp;&nbsp;";
+
+									?>
+								</td>
+								<td valign="middle" width="48" hidden  >
+									<input name="tempid_222_<?php print $count_222 ?>"class="input3" id="tempid_222_<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['id'];?>" readonly  ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="pro_no_222<?php print $count_222 ?>"class="input3" id="pro_no_222<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['pro_no'];?>" readonly ></td>
+								
+								
+								
+								
+								<td valign="middle" width="48" >
+									<input name="p_date_222<?php print $count_222 ?>"class="input3" id="p_date_222<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['p_date'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="design_222<?php print $count_222 ?>"class="input3" id="design_222<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['design'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="lot_222<?php print $count_222 ?>"class="input3" id="lot_222<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['lot'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_222<?php print $count_222 ?>"class="input3" id="qty_222<?php print $count_222 ?>"
+									
+								value="<?php print $a_2['qty'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_222<?php print $count_222 ?>"class="input3" id="qty_222<?php print $count_222 ?>"
+									
+								value="<?php print $minutes.":".$sec;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_222<?php print $count_222 ?>"class="input3" id="qty_222<?php print $count_222 ?>"
+									
+								value="<?php print $s_time;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_222<?php print $count_222 ?>"class="input3" id="qty_222<?php print $count_222 ?>"
+									
+								value="<?php 
+								$s_time_temp2= strtotime($s_time);
+								$e_time = date("H:i:s",strtotime('+'.($time).'seconds',$s_time_temp2));
+								print $e_time ;?>" readonly ></td>
+								
+								
+								
+								
+								<td><input name="order_no_222<?php print $count_222 ?>" type="text" id="order_no_222<?php print $count_222 ?>" value="<?php
+														
+														print $a_2['order_no'];
+													?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"></td>
+								
+								<td width="69" align="center" valign="middle" nowrap class="tdinfo"  height="30">
+										
+										<input type="checkbox" name="prio_222<?php print $count_222 ?>" id="prio_222<?php print $count_222 ?>"  > 
+										
+									</td>
+								
+								
+								
+								<!---
+									<td>
+									<input type="button" onclick="Drop_1(<?php print $count_2 ?>)" class="button button3"  Value="Drop" style="color:#ffffff; width: 100; height: 30;" />
+									
+									
+									</td>
+								-->
+								
+								
+								
+								
+								
+								
+							</tr>
+							<tr class="report_font">
+								<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+							
+							</tr> 
+							
+							
+							
+						<?php }?>
+						
+						
+						
+						<td align="right" valign="middle"  class="">
+							<input name="count" class="input3"id="count"					
+						value="<?php print $total_received_m;?>" readonly   ></td>
+						
+					</tr>
+					
+					<tr>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+					<td><input name="btnpri222" value="Print Plan" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+					</tr>
+					
+					<tr>
+						<td valign="middle" nowrap class="tdinfo">
+							<input name="count_222" class="input3"id="count_222"					
+						value="<?php print $count_222;?>" readonly hidden ></td>
+						<td></td>
+						<td></td>
+						<td></td><td></td><td></td>
+						<td hidden><input name="btndrop_222" value="Drop" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /> 
+							
+							
+						</td>
+						
+					</tr>
+					<tr class="report_font">
+						<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+					</tr> 
+					
+				</table>
+
+				<table width="400" height="100" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							
+							<td colspan="10"  width="300" height="25" align="center" valign="middle" bgcolor="#004848" class="style15">Planned Jobs shift 7.30 - 4.30  User 3</td>
+							
+						</tr>
+						<tr class="style13">
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Pro No</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Plan Date</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Design</td>
+							
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Lot</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Start Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">End Time</td>
+							
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Order</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Check</td>
+							<td width="10" height="25" valign="middle" bgcolor="#004848" class="style13">  </td>
+						</tr>  
+						
+						<tr class="tcday">
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+							<td><input  id="btnprio_22" name="btnprio_22" value="Remove" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							<td><input name="btnchange2" value="Change ALL" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							</tr> <?php 
+							include("database_connections.php");
+							//print("select * from tbl_cut_ins_plan a where p_date ='$today' order by order_no");exit;
+							$query_2 =mysqli_query($con,"select * from tbl_cut_ins_plan a where p_date ='$today' and shift = '3' order by ABS(order_no),pro_no");
+							
+							$count_22=0;
+							
+							$total_time=0;
+					
+					$final_t_qty=0;
+					$print_tea1=0;
+					$teac_tt=0;
+					$teac2_tt=0;
+							while($a_2=mysqli_fetch_array($query_2))
+							{
+								$time=$a_2['qty']*25;
+						$minutes=floor($time/60);
+						$sec=round($time%60);
+						$t_time = $time+360;
+
+						
+						
+						if($count_22 < 1){
+							//print(88);
+							$s_time = strtotime('08:45:00');
+							$s_time = date("H:i:s",strtotime('+0 seconds',$s_time));
+							//$s_time_t = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							$t_time_t=$total_time;
+							//print($t_time_t);
+						}
+						else{
+							
+							$s_time = strtotime('08:45:00');
+							$s_time = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							//print($s_time);exit;
+						}
+						$total_time=$total_time+$t_time;
+						$t_minutes=floor($total_time/60);
+						$t_sec=round($total_time%60);
+						
+						
+						$tea=$s_time;
+																		if($s_time < '08:46:00'){
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Decal Counting"</td>
+																			</tr>
+<?php
+																		}
+
+
+																		if($tea<'09:20:00'){
+																			
+																			$tea_t=$tea;																			
+																		}
+																		
+																		if($tea_t<$tea && $print_tea1 != 1 ){
+																		
+																		$print_tea1 = 1;
+																		$s_time_temp = strtotime($s_time);
+																		$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+
+																		$total_time=$total_time+1800;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+																		
+																		
+																		$teac2=$s_time;
+																		
+																		if($teac2<12.00){
+																			//print(333);exit;
+																			$teac2_t=$teac2;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac2_t<$teac2 && $teac2_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+2700 seconds',$s_time_temp));
+																			$teac2_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Lunch"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+
+																		$teac3=$s_time;
+																		
+																		if($teac3<15.00){
+																			//print(333);exit;
+																			$teac3_t=$teac3;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac3_t<$teac3 && $teac3_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+1200 seconds',$s_time_temp));
+																			$teac3_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+
+						
+						
+							?>
+							<tr class="style13" <?php if($a_2['reset']=='1'){ ?> bgcolor="#CCFFFF"<?php }?>>
+								<td width="10" align="right" valign="middle" hidden > 
+									<?php
+										$count_22++;
+										print "(".$count_22.").&nbsp;&nbsp;";
+
+									?>
+								</td>
+								<td valign="middle" width="48" hidden  >
+									<input name="tempid_22_<?php print $count_22 ?>"class="input3" id="tempid_22_<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['id'];?>" readonly  ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="pro_no_22<?php print $count_22 ?>"class="input3" id="pro_no_22<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['pro_no'];?>" readonly ></td>
+								
+								
+								
+								
+								<td valign="middle" width="48" >
+									<input name="p_date_22<?php print $count_22 ?>"class="input3" id="p_date_22<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['p_date'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="design_22<?php print $count_22 ?>"class="input3" id="design_22<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['design'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="lot_22<?php print $count_22 ?>"class="input3" id="lot_22<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['lot'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_22<?php print $count_22 ?>"class="input3" id="qty_22<?php print $count_22 ?>"
+									
+								value="<?php print $a_2['qty'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_22<?php print $count_22 ?>"class="input3" id="qty_22<?php print $count_22 ?>"
+									
+								value="<?php print $minutes.":".$sec;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_22<?php print $count_22 ?>"class="input3" id="qty_22<?php print $count_22 ?>"
+									
+								value="<?php print $s_time;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_22<?php print $count_22 ?>"class="input3" id="qty_22<?php print $count_22 ?>"
+									
+								value="<?php 
+								$s_time_temp2= strtotime($s_time);
+								$e_time = date("H:i:s",strtotime('+'.($time).'seconds',$s_time_temp2));
+								print $e_time ;?>" readonly ></td>
+								
+								
+								
+								
+								<td><input name="order_no_22<?php print $count_22 ?>" type="text" id="order_no_22<?php print $count_22 ?>" value="<?php
+														
+														print $a_2['order_no'];
+													?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"></td>
+								
+								<td width="69" align="center" valign="middle" nowrap class="tdinfo"  height="30">
+										
+										<input type="checkbox" name="prio_22<?php print $count_22 ?>" id="prio_22<?php print $count_22 ?>"  > 
+										
+									</td>
+								
+								
+								
+								<!---
+									<td>
+									<input type="button" onclick="Drop_1(<?php print $count_22 ?>)" class="button button3"  Value="Drop" style="color:#ffffff; width: 100; height: 30;" />
+									
+									
+									</td>
+								-->
+								
+								
+								
+								
+								
+								
+							</tr>
+							<tr class="report_font">
+								<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+							
+							</tr> 
+							
+							
+							
+						<?php }?>
+						
+						
+						
+						<td align="right" valign="middle"  class="">
+							<input name="count" class="input3"id="count"					
+						value="<?php print $total_received_m;?>" readonly   ></td>
+						
+					</tr>
+					
+					<tr>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+					<td><input name="btnpri2" value="Print Plan" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+					</tr>
+					
+					<tr>
+						<td valign="middle" nowrap class="tdinfo">
+							<input name="count_22" class="input3"id="count_22"					
+						value="<?php print $count_22;?>" readonly hidden ></td>
+						<td></td>
+						<td></td>
+						<td></td><td></td><td></td>
+						<td hidden><input name="btndrop_2" value="Drop" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /> 
+							
+							
+						</td>
+						
+					</tr>
+					<tr class="report_font">
+						<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+					</tr> 
+					
+				</table>
+
+				<table width="400" height="100" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							
+							<td colspan="10"  width="300" height="25" align="center" valign="middle" bgcolor="#004848" class="style15">Planned Jobs shift 7.30 - 4.30  User 4</td>
+							
+						</tr>
+						<tr class="style13">
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Pro No</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Plan Date</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Design</td>
+							
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Lot</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">QTY</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Start Time</td>
+								<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">End Time</td>
+							
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Order</td>
+							<td width="10" height="25" align="left" valign="middle" bgcolor="#004848" class="style15">Check</td>
+							<td width="10" height="25" valign="middle" bgcolor="#004848" class="style13">  </td>
+						</tr>  
+						
+						<tr class="tcday">
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+							<td><input  id="btnprio_2222" name="btnprio_2222" value="Remove" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							<td><input name="btnchange2222" value="Change ALL" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+							</tr> <?php 
+							include("database_connections.php");
+							//print("select * from tbl_cut_ins_plan a where p_date ='$today' order by order_no");exit;
+							$query_2 =mysqli_query($con,"select * from tbl_cut_ins_plan a where p_date ='$today' and shift = '4' order by ABS(order_no),pro_no");
+							
+							$count_2222=0;
+							
+							$total_time=0;
+					
+					$final_t_qty=0;
+					$print_tea1=0;
+					$teac_tt=0;
+					$teac2_tt=0;
+							while($a_2=mysqli_fetch_array($query_2))
+							{
+								$time=$a_2['qty']*25;
+						$minutes=floor($time/60);
+						$sec=round($time%60);
+						$t_time = $time+360;
+
+						
+						
+						if($count_2222 < 1){
+							//print(88);
+							$s_time = strtotime('08:45:00');
+							$s_time = date("H:i:s",strtotime('+0 seconds',$s_time));
+							//$s_time_t = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							$t_time_t=$total_time;
+							//print($t_time_t);
+						}
+						else{
+							
+							$s_time = strtotime('08:45:00');
+							$s_time = date("H:i:s",strtotime('+'.($total_time).'seconds',$s_time));
+							//print($s_time);exit;
+						}
+						$total_time=$total_time+$t_time;
+						$t_minutes=floor($total_time/60);
+						$t_sec=round($total_time%60);
+						
+						
+						$tea=$s_time;
+																		if($s_time < '08:46:00'){
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Decal Counting"</td>
+																			</tr>
+<?php
+																		}
+
+
+																		if($tea<'09:20:00'){
+																			
+																			$tea_t=$tea;																			
+																		}
+																		
+																		if($tea_t<$tea && $print_tea1 != 1 ){
+																		
+																		$print_tea1 = 1;
+																		$s_time_temp = strtotime($s_time);
+																		$s_time = date("H:i:s",strtotime('+1800 seconds',$s_time_temp));
+
+																		$total_time=$total_time+1800;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td colspan='10'>"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+																		
+																		
+																		$teac2=$s_time;
+																		
+																		if($teac2<12.00){
+																			//print(333);exit;
+																			$teac2_t=$teac2;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac2_t<$teac2 && $teac2_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+2700 seconds',$s_time_temp));
+																			$teac2_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Lunch"</td>
+																			</tr>
+																			<?php
+																		}
+																		
+
+																		$teac3=$s_time;
+																		
+																		if($teac3<15.00){
+																			//print(333);exit;
+																			$teac3_t=$teac3;																			
+																		}
+																		else{
+																			//print($tea);exit;
+																			
+																		}
+																		if($teac3_t<$teac3 && $teac3_tt!=1){
+																			$s_time_temp = strtotime($s_time);
+																			$s_time = date("H:i:s",strtotime('+1200 seconds',$s_time_temp));
+																			$teac3_tt=1;
+																			?>
+																			<tr>
+																			<td colspan='4'></td>
+																			<td >"Tea Time"</td>
+																			</tr>
+																			<?php
+																		}
+
+						
+						
+							?>
+							<tr class="style13" <?php if($a_2['reset']=='1'){ ?> bgcolor="#CCFFFF"<?php }?>>
+								<td width="10" align="right" valign="middle" hidden > 
+									<?php
+										$count_2222++;
+										print "(".$count_2222.").&nbsp;&nbsp;";
+
+									?>
+								</td>
+								<td valign="middle" width="48" hidden  >
+									<input name="tempid_2222_<?php print $count_2222 ?>"class="input3" id="tempid_2222_<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['id'];?>" readonly  ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="pro_no_2222<?php print $count_2222 ?>"class="input3" id="pro_no_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['pro_no'];?>" readonly ></td>
+								
+								
+								
+								
+								<td valign="middle" width="48" >
+									<input name="p_date_2222<?php print $count_2222 ?>"class="input3" id="p_date_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['p_date'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="design_2222<?php print $count_2222 ?>"class="input3" id="design_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['design'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="lot_2222<?php print $count_2222 ?>"class="input3" id="lot_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['lot'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_2222<?php print $count_2222 ?>"class="input3" id="qty_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $a_2['qty'];?>" readonly ></td>
+								<td valign="middle" width="48" >
+									<input name="qty_2222<?php print $count_2222 ?>"class="input3" id="qty_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $minutes.":".$sec;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_2222<?php print $count_2222 ?>"class="input3" id="qty_2222<?php print $count_2222 ?>"
+									
+								value="<?php print $s_time;?>" readonly ></td>
+								
+								<td valign="middle" width="48" >
+									<input name="qty_2222<?php print $count_2222 ?>"class="input3" id="qty_2222<?php print $count_2222 ?>"
+									
+								value="<?php 
+								$s_time_temp2= strtotime($s_time);
+								$e_time = date("H:i:s",strtotime('+'.($time).'seconds',$s_time_temp2));
+								print $e_time ;?>" readonly ></td>
+								
+								
+								
+								
+								<td><input name="order_no_2222<?php print $count_2222 ?>" type="text" id="order_no_2222<?php print $count_2222 ?>" value="<?php
+														
+														print $a_2['order_no'];
+													?>" style="width:100;font-size: smaller;color: red;font-weight: bold;"></td>
+								
+								<td width="69" align="center" valign="middle" nowrap class="tdinfo"  height="30">
+										
+										<input type="checkbox" name="prio_2222<?php print $count_2222 ?>" id="prio_2222<?php print $count_2222 ?>"  > 
+										
+									</td>
+								
+								
+								
+								<!---
+									<td>
+									<input type="button" onclick="Drop_1(<?php print $count_22 ?>)" class="button button3"  Value="Drop" style="color:#ffffff; width: 100; height: 30;" />
+									
+									
+									</td>
+								-->
+								
+								
+								
+								
+								
+								
+							</tr>
+							<tr class="report_font">
+								<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+							
+							</tr> 
+							
+							
+							
+						<?php }?>
+						
+						
+						
+						<td align="right" valign="middle"  class="">
+							<input name="count" class="input3"id="count"					
+						value="<?php print $total_received_m;?>" readonly   ></td>
+						
+					</tr>
+					
+					<tr>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+					<td><input name="btnpri2222" value="Print Plan" class="button button2"  type="submit" src="search.jpg" width="60" height="20"    /></td>
+					</tr>
+					
+					<tr>
+						<td valign="middle" nowrap class="tdinfo">
+							<input name="count_2222" class="input3"id="count_2222"					
+						value="<?php print $count_2222;?>" readonly hidden ></td>
+						<td></td>
+						<td></td>
+						<td></td><td></td><td></td>
+						<td hidden><input name="btndrop_2222" value="Drop" class="button button1"  type="submit" src="search.jpg" width="60" height="20"    /> 
+							
+							
+						</td>
+						
+					</tr>
+					<tr class="report_font">
+						<td height="1" colspan="8" valign="top" bgcolor="#FFFFFF" class="style16">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/line.png" width="100%" height="1"></td>
+					</tr> 
+					
+				</table>
+				
+			</td>
+			
+			
+		</tr>
+		
+		
+		
+		
+		
+	</table>
+	
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+<p>
+	
+</p>
+<p>&nbsp; </p>
+<p>&nbsp; </p>
+<?php
+}
+

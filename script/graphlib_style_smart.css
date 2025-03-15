@@ -1,0 +1,239 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/* hide vertical scrollbar */
+notificationbox {
+	overflow-x: hidden;
+}
+browser[type="content-primary"], browser[type="content-targetable"] {
+	overflow-y: scroll;
+	margin-right: -16px; /* cut off 16 pixels no matter what*/
+}
+
+#header{
+     background-color:#3366FF;
+    width: 100%;
+	font-size:15px;
+	font-weight:bold;
+    border-radius:5px;
+	height:35px;
+	
+}
+
+.comapny_loge{
+    border-radius:5px;
+	height:35px;
+}
+
+
+.comapny_loge_image{
+    border-radius:1px;
+}
+
+
+
+
+
+.header_title{
+	font-size:24px;
+	font-weight:bold;
+	color:#FFFFFF;
+	/*font-family: Tahoma, Geneva, sans-serif;*/
+	 font-family: Verdana, Geneva, sans-serif;
+
+
+}
+
+
+.header_date{
+  padding-left:300px;
+  font-size:11px;
+  color: #333333;
+  font-family: �Palatino Linotype�, �Book Antiqua�, Palatino, serif;
+  
+  
+
+}
+.header_live_img{
+  font-size:11px;
+  color: #333333;
+  font-family: Coronetscript, cursive;
+
+}
+
+
+.header_live_title{
+  font-size:15px;
+  color:#FF0000;
+  font-family: Coronetscript, cursive;
+
+}
+
+
+.sub_title{
+  font-size:15px;
+  font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;  color:#FFFFFF;
+  font-weight: bold;
+
+ 
+
+}
+
+
+#leftcol {
+  background: #aaa;
+  float: left;
+  width: 20%;
+  height: 500px;
+}
+
+#rightcol {
+  background: #aaa;
+  float: right;
+  width: 20%;
+  height: 500px;
+}
+
+#content {
+  width: 100%;
+  height:500px;
+
+}
+
+
+
+
+#ticker {
+    width: 100%;
+	text-align:right;
+	font-family:Verdana, Arial, Helvetica, sans-serif;	
+	font-size:11px;
+	color:#000000;
+	
+	background: #4679BD;
+	height:40px;
+	padding-bottom:0px;
+	border-radius:5px;
+	
+  
+}
+
+
+
+#fonter {
+    width: 100%;
+	text-align:right;
+	font-family:Verdana, Arial, Helvetica, sans-serif;	
+	font-size:11px;
+	color:#000000;
+	
+	background: #4679BD;
+	height:40px;
+	padding-bottom:0px;
+	border-radius:5px;
+	
+  
+}
+
+.slider_div{
+	border: 0px solid #333; 
+	display: block; 
+	margin: 0px; 
+	padding:opx;
+        padding-top:50px;
+	height:400px;/*changed  the slider hight */
+    width: 100%;
+	background:#666666;
+				
+}
+
+.slider_div div{
+	 color: #333; 
+	 display: none; 
+	 height:100%;
+	 width: 100%;
+}
+			
+.slider_div div:first-child{
+	 display: block;
+	 height:inherit;
+	}
+
+.data_input_stamp{
+	background-color:#FFFFFF;
+	border: 3px solid     #9933FF;
+	width:150px;
+	height:25px;
+	font-size:16px;
+	border-radius:5px;
+	color:#9933FF;
+	transform:rotate(-14deg);	
+}
+
+
+.image{
+	border-radius:3px;
+	color:#9933FF;
+	background-color:#FFFFFF;
+}
+
+
+
+.image_graph{
+	border-radius:3px;
+}
+
+
+
+.td_border td{
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+}
+
+
+.id_text{
+	font-family:Verdana, Arial, Helvetica, sans-serif;	
+	font-size:12px;
+	font-weight:bold;
+    color:#FFFFFF;
+
+
+}
+
+
+
+/* Jquery Smooth Marquee Effect with jQuery*/
+
+
+.wrapper {
+position: relative;
+margin: 0 auto;
+width: 100%;
+font-family:Verdana, Arial, Helvetica, sans-serif;	
+
+
+
+}
+
+.inner_area {
+background: whiteSmoke;
+padding: 0em;
+width:100%;
+height:20px;
+box-shadow: 0em 0em 0.5em #c9c9c9;
+}
+
+
+.wrapper .inner_area p {
+white-space: normal;
+height:20px;
+}
+
+/* Jquery Smooth Marquee Effect with jQuery end*/
+
+
+
+
