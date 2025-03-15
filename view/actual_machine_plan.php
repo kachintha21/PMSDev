@@ -1,0 +1,718 @@
+<?php
+error_reporting(E_PARSE | E_WARNING | E_ERROR);
+include("../include/db_config.php");
+include("../include/conn.php");
+include("../include/common.php");
+include("../model/PigmentIssuesDetails.class.php");
+include("../model/PigmentModel.class.php");
+$pl = new PigmentIssuesDetails(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$pm = new PigmentModel(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+if ($_SESSION['logged_usr_id']) {
+
+    $pname = $_SESSION['design_number_pidt'];
+    $loge_user = $_SESSION['logged_usr_id'];
+    $loge_depart = $_SESSION['logged_usr_depat'];
+} else {
+    session_start();
+    session_unset();
+    session_destroy();
+    session_write_close();
+    header("location:../index.php");
+    exit();
+}
+
+
+?>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>Noritake|Machine Plan</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+        <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL STYLES -->
+        <link rel="stylesheet" type="text/css" href="../assets/global/plugins/select2/select2.css"/>
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <!-- BEGIN THEME STYLES -->
+
+        <link href="../assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="../assets/global/css/components-rounded.css" rel="stylesheet" id="style_components" type="text/css" />
+
+        <link href="../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link id="style_color" href="../assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+
+
+
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="favicon.ico"/>
+    </head>
+
+    <body class="page-header-fixed page-quick-sidebar-over-content ">
+        <!-- BEGIN HEADER -->
+        <div class="page-header -i navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <?php
+            include_once '../tpl/header.php';
+            ?>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <div class="clearfix">
+        </div>
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <?php
+            include_once '../tpl/menu.php';
+            ?>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+
+
+                    <h3 class="page-title">Machine Plan
+
+                        <small></small>
+                    </h3>
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="index.html">Home</a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="pigment_issues_details_data.php"> View
+
+                                </a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="#">Machine Plan
+                            </li>
+
+
+
+
+                        </ul>
+                        <div class="page-toolbar">
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                                    Actions <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li>
+                                        <a href="#">Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Another action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Something else here</a>
+                                    </li>
+                                    <li class="divider">
+                                    </li>
+                                    <li>
+                                        <a href="#">Separated link</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12"> 
+                            <!-- BEGIN PORTLET-->
+                            <div class="portlet box blue-hoki">
+                                <div class="portlet-title">
+                                    <div class="caption"> <i class="fa fa-gift"></i>Machine Plan
+
+
+
+
+
+
+                                    </div>
+                                    <div class="tools"> <a href="javascript:;" class="collapse"> </a> </div>
+                                </div>
+
+
+
+
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" name="frmPurchaseRequestAddEdit" class="form-horizontal form-bordered" id="myForm" >
+
+                                        <input  type="hidden" class="form-control"  name="org_name_pidt" id="org_name_pidt"  value="<?php echo($loge_user); ?>" />
+                                        <input  type="hidden" class="form-control"  name="barcode_ref_no_pidt" id="barcode_ref_no_pidt" value="<?php echo($pl->getNextPigmentIssuesDetailsRefNo("pigment_issues_details_tbl", "NLPLPM")); ?>"  />
+
+                                        <div class="form-body">                   
+
+
+
+                                            <div class="form-group form-group">
+
+
+
+
+                                                <label class="control-label col-sm-2">Plan Ref No
+                                                    <span style="color: crimson;"> *</span></label>
+                                                <div class="col-sm-2">
+
+
+                                                    <input  type="text" class="form-control" name="design_number_pidt" id="design_number_pidt"  value="<?php echo($_GET['id']); ?>"   readonly/> 
+
+                                                </div>
+
+
+
+
+                                                <label class="control-label col-sm-2">Machine No
+                                                    <span style="color: crimson;"> *</span></label>
+                                                <div class="col-sm-2">
+
+
+                                                    <input  type="text" class="form-control" name="design_number_pidt" id="design_number_pidt"  value="<?php echo("M01"); ?>"  /> 
+
+                                                </div>
+
+
+
+
+
+<!--                                                <label class="control-label col-sm-2">Date
+                                                    <span style="color: crimson;"> *</span></label>
+                                                <div class="col-sm-2">
+
+
+                                                    <input  type="text" class="form-control" name="design_number_pidt" id="design_number_pidt"  value="<?php echo("2021-01-14"); ?>"  /> 
+
+                                                </div>-->
+
+
+
+                                            </div>
+
+
+
+
+
+
+                                            <div class="container"  style="width:100%" >
+                                                <div class="row clearfix">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-bordered table-hover" id="tab_logic">
+
+                                                            <thead>
+                                                                <tr>
+
+
+                                                                    <th class="text-center" width="2%">No</th>
+
+                                                                    <th class="text-center" width="10%">Time
+
+                                                                    <th class="text-center" width="10%">Start
+                                                                        Date</th>                        
+
+                                                                    <th class="text-center" width="10%"> Finish	
+                                                                        Date
+
+                                                                    </th>
+                                                                    <th class="text-center" width="10%">Pro No
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="10%">Design
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="5%">Lot No
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="5%"># Color</th>
+                                                                    <th class="text-center" width="5%">#Sheet</th>
+
+
+                                                                    <th class="text-center" width="5%">P-Color </th>
+                                                                    <th class="text-center" width="10%">Actual  </th>
+                                                                    <th class="text-center" width="10%">Defect Qty  </th>
+
+                                                                    <th class="text-center" width="10%">Status</th>
+
+                                                                    <th class="text-center" width="10%">Action</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+
+                                                                <?php
+                                                                $query = "SELECT * FROM virtual_planner_final_tbl WHERE status_vpft='0' AND machine_no_vpft='M01'  ORDER BY id ASC";
+                                                                ?>  
+
+                                                                <?php
+                                                                if ($result = $conn->query($query)) {
+                                                                    $index = 0;
+                                                                    while ($row = $result->fetch_assoc()) {
+                                                                        $index ++;
+                                                                        ?>    
+
+                                                                        <tr id='addr0' class="tr-row">
+                                                                            <td>
+
+                                                                                <?php
+                                                                                echo($index);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_time_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_date_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_date_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["production_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["pattern_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["lot_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["item09_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["num_sheets"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["colour_index_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                      <td>
+                                          <input  type="number" class="form-control" min="1"  value="<?php echo($row["num_sheets"]);?>">
+                                          
+                                                                             
+
+                                                                           
+
+                                                                            </td>
+                                                                         <td>
+                                          <input  type="number" class="form-control" min="1" >
+                                          
+                                                                             
+
+                                                                           
+
+                                                                            </td>   
+                                                                            
+
+
+                                                                            <td>
+
+
+
+                                                                                <select  class="form-control" name="section" id="section">
+
+                                                                                    <option value="YES">YES</option>
+                                                                                    <option value="No">NO</option>
+                                                                                      <option value="HOLD">HOLD</option>
+                                                                                    
+                                                                                </select>   
+
+
+                                                                            </td>
+                                                                            <td><button type="button" class="btn purple"  onClick="parent.location = '../controllers/demo_process.php?id=<?php echo($row["id"]); ?>'"   > <i ></i> Save </button></td>
+                                                                        </tr>
+                                                                  
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                </form>
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+          <div class="container"  style="width:100%" >
+                                                <div class="row clearfix">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-bordered table-hover" id="tab_logic">
+
+                                                            <thead>
+                                                                <tr>
+
+
+                                                                    <th class="text-center" width="2%">No</th>
+
+                                                                    <th class="text-center" width="10%">Time
+
+                                                                    <th class="text-center" width="10%">Start
+                                                                        Date</th>                        
+
+                                                                    <th class="text-center" width="10%"> Finish	
+                                                                        Date
+
+                                                                    </th>
+                                                                    <th class="text-center" width="10%">Pro No
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="10%">Design
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="10%">Lot
+
+                                                                    </th>
+
+                                                                    <th class="text-center" width="10%"># Color</th>
+                                                                    <th class="text-center" width="10%">#Sheet</th>
+
+
+                                                                    <th class="text-center" width="10%">P-Color  </th>
+                                                                         <th class="text-center" width="10%">Actual   </th>
+
+                                                                    <th class="text-center" width="10%">Date</th>
+
+                                                                    <th class="text-center" width="10%">Time</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+
+                                                                <?php
+                                                                $query = "SELECT * FROM printing_dynamic_status_tbl WHERE item10_pdst='1'  AND process_name_pdst='".$_GET['id']."'  ORDER BY id ASC";
+                                                                ?>  
+
+                                                                <?php
+                                                                if ($result = $conn->query($query)) {
+                                                                    $index = 0;
+                                                                    while ($row = $result->fetch_assoc()) {
+                                                                        $index ++;
+                                                                        ?>    
+
+                                                                        <tr id='addr0' class="tr-row"  style="background-color: lightblue;">
+                                                                            <td>
+
+                                                                                <?php
+                                                                                echo($index);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_time_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_date_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["plan_date_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["production_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["pattern_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["lot_no_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["item09_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["num_sheets"]);
+                                                                                ?>
+
+                                                                            </td>
+
+
+
+                                                                            <td>
+                                                                                <?php
+                                                                                echo($row["colour_index_pdst"]);
+                                                                                ?>
+
+                                                                            </td>
+                                                                            
+                                                                            
+   <td>
+                                                                                <?php
+                                                                                echo('-');
+                                                                                ?>
+
+                                                                            </td>
+                                                                            
+
+
+
+
+                                                                            <td>
+  <?php
+                                                                                echo($row["actual_date_pdst"]);
+                                                                                ?>
+
+
+
+
+                                                                            </td>
+                                                                            <td>
+                                                                             
+                                                                                  <?php
+                                                                                echo($row["actual_time_pdst"]);
+                                                                                ?>
+                                                                            </td>
+                                                                        </tr>
+                                                                  
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                </form>
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+                                    </form>
+
+
+                                 
+
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>   
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<!-- BEGIN FOOTER -->
+<?php
+include_once '../tpl/footer.php';
+?>
+
+
+<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="../assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="../assets/global/plugins/select2/select2.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="../assets/admin/pages/scripts/form-samples.js"></script>
+
+
+<script src="../script/bootstrap.min.js"></script>
+<script src="script/jquery-1.11.1.min.js"></script>
+<!--<script src="script/certificate_post.js"></script>-->
+
+<script src="../js/pigment.js"></script>
+
+
+
+<script src="../ajax_post/demo_post.js"></script>
+
+
+<script type='text/javascript'>
+
+
+
+
+
+                                                                        $(document).ready(function () {
+                                                                            $('#myForm input').keydown(function (e) {
+                                                                                if (e.keyCode == 13) {
+
+                                                                                    if ($(':input:eq(' + ($(':input').index(this) + 1) + ')').attr('type') == 'submit') {// check for submit button and submit form on enter press
+                                                                                        return true;
+                                                                                    }
+
+                                                                                    $(':input:eq(' + ($(':input').index(this) + 1) + ')').focus();
+
+                                                                                    return false;
+                                                                                }
+
+                                                                            });
+                                                                        });
+</script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function () {
+        // initiate layout and plugins
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        QuickSidebar.init(); // init quick sidebar
+        Demo.init(); // init demo features
+        FormSamples.init();
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

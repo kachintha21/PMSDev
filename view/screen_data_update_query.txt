@@ -1,0 +1,2 @@
+update screen_planner_final_tbl a SET is_edit_spft ='1'
+WHERE a.date_spft <'2023-12-01'
